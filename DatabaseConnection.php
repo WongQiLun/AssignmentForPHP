@@ -12,10 +12,12 @@
  * @author user
  */
 class DatabaseConnection {
+
     //put your code here
-      private static $instance = null;
-  private $db;
-    private function __construct(){
+    private static $instance = null;
+    private $db;
+
+    private function __construct() {
         $host = 'localhost';
         $dbName = 'assignment_db';
         $dbuser = 'root';
@@ -25,18 +27,23 @@ class DatabaseConnection {
         $dsn = "mysql:host=$host;dbname=$dbName";
 
         try {
-             $this->db = new PDO($dsn, $dbuser, $dbpassword);
+            $this->db = new PDO($dsn, $dbuser, $dbpassword);
             echo "<p>Connection to database successful</p>";
         } catch (PDOException $ex) {
             echo "<p>ERROR: " . $ex->getMessage() . "</p>";
             exit;
         }
-    } 
-        public static function getInstance(){
-        if(self::$instance == null){
-            self::$instance= new DatabaseConnection();
-            
+    }
+
+    public static function getInstance() {
+        if (self::$instance == null) {
+            self::$instance = new DatabaseConnection();
         }
         return self::$instance;
     }
+
+    public function closeConnection() {
+        $this->db = null;
+    }
+
 }
