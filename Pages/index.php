@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-require_once 'DatabaseConnection.php';
+require_once '../SecurityClasses/DatabaseConnection.php';
 ?>
 <!--
 To change this license header, choose License Headers in Project Properties.
