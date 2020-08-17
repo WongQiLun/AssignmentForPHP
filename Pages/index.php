@@ -16,8 +16,8 @@ and open the template in the editor.
     <body>
         <?php
         $database = DatabaseConnection::getInstance();
-        $x = new Returns();
-        $x->calculateOverdueFees();
+        $x = new Rental ();
+        $x->rentBook(109, 200);
         ?>
     </body>
 </html>

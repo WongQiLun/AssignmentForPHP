@@ -1,16 +1,5 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Returns
- *
- * @author user
- */
+require_once 'Rental.php';
 class Returns {
 
     private $dateOfReturn;
@@ -18,6 +7,14 @@ class Returns {
     private $overdueFee;
     private $returnID;
     private $rentalID;
+    private $staffID;
+    function __construct($dateOfReturn, $daysOverdue, $overdueFee, $returnID, $rentalID) {
+        $this->dateOfReturn = $dateOfReturn;
+        $this->daysOverdue = $daysOverdue;
+        $this->overdueFee = $overdueFee;
+        $this->returnID = $returnID;
+        $this->rentalID = $rentalID;
+    }
 
     function getDaysOverdue() {
         return $this->daysOverdue;
@@ -58,7 +55,9 @@ class Returns {
     function setReturnID($returnID): void {
         $this->returnID = $returnID;
     }
-
+    function retrieveRental(){
+        
+    }
     function retrieveDueDate() {//toDO
     }
 
@@ -66,7 +65,7 @@ class Returns {
     }
 
     function returnBook() {
-        $this->setDateOfReturn(date("d/m/Y"));
+        $this->setDateOfReturn(date("Y-m-d"));
         $dayOfReturn = strtotime($this->$dateOfReturn);
         $duedate = strtotime($this->retrieveDueDate());
         $this->daysOverdue = $dayOfReturn - $duedate;
