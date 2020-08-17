@@ -12,5 +12,10 @@
  * @author user
  */
 class inputValidation {
-    //put your code here
+    function completionValidation($input){
+        if(trim($input)==""){
+            return false;
+        }
+        return true;
+    }
 }
