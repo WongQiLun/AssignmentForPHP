@@ -12,17 +12,31 @@
  * @author user
  */
 class Returns {
+
     private $dateOfReturn;
-    private $overdate;
+    private $daysOverdue;
     private $overdueFee;
     private $returnID;
-    
-    function getDateOfReturn() {
-        return $this->dateOfReturn;
+    private $rentalID;
+
+    function getDaysOverdue() {
+        return $this->daysOverdue;
     }
 
-    function getOverdate() {
-        return $this->overdate;
+    function getRentalID() {
+        return $this->rentalID;
+    }
+
+    function setDaysOverdue($daysOverdue): void {
+        $this->daysOverdue = $daysOverdue;
+    }
+
+    function setRentalID($rentalID): void {
+        $this->rentalID = $rentalID;
+    }
+
+    function getDateOfReturn() {
+        return $this->dateOfReturn;
     }
 
     function getOverdueFee() {
@@ -37,10 +51,6 @@ class Returns {
         $this->dateOfReturn = $dateOfReturn;
     }
 
-    function setOverdate($overdate): void {
-        $this->overdate = $overdate;
-    }
-
     function setOverdueFee($overdueFee): void {
         $this->overdueFee = $overdueFee;
     }
@@ -49,5 +59,20 @@ class Returns {
         $this->returnID = $returnID;
     }
 
+    function retrieveDueDate() {//toDO
+    }
+
+    function calculateOverdueFees() {//toDo
+    }
+
+    function returnBook() {
+        $this->setDateOfReturn(date("d/m/Y"));
+        $dayOfReturn = strtotime($this->$dateOfReturn);
+        $duedate = strtotime($this->retrieveDueDate());
+        $this->daysOverdue = $dayOfReturn - $duedate;
+        if ($this->daysOverdue >= 1) {
+            $this->calculateOverdueFees();
+        }
+    }
 
 }

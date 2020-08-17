@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
 require_once '../SecurityClasses/DatabaseConnection.php';
+require_once '../class/Returns.php';
 ?>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -15,7 +16,8 @@ and open the template in the editor.
     <body>
         <?php
         $database = DatabaseConnection::getInstance();
-        
+        $x = new Returns();
+        $x->calculateOverdueFees();
         ?>
     </body>
 </html>
