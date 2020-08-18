@@ -15,7 +15,7 @@
       <div class="main">
          <div class="col-md-6 col-sm-12">
             <div class="login-form">
-               <form>
+                <form method="post">
                   <div class="form-group">
                      <label>User Name</label>
                      <input type="text" class="form-control" placeholder="User Name">
@@ -31,5 +31,20 @@
          </div>
       </div>
 <?php
+if ((!isset($_POST['name'])) || !isset($_POST['password'])) {
 
-
+   } else {
+        $db=new Authentication();
+        $username = trim($_POST['name']);
+        $passwd = sha1(trim($_POST['password']));
+        $authuser=$db->AuthenticateUser($username,$passwd);
+           
+        if ($authuser == null) {
+            echo "<p>Unauthorized user. </p>";
+            echo "<p><a href='register.php'>Click here to register as a new user</a></p>";
+        } else {            
+            echo "<p><h2>Welcome $username!</h2></p>";
+            echo "<p><a href='search.html'>Search Products</a></p>";
+        }
+        $db->closeConnection();
+    }

@@ -72,6 +72,7 @@ class Returns {
         if ($this->daysOverdue >= 1) {
             $this->calculateOverdueFees();
         }
+        // insert into database
     }
 
 }
