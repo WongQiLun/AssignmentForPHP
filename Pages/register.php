@@ -10,75 +10,105 @@
     <body>
         <?php
         require_once '../SecurityClasses/DatabaseConnection.php';
-        $nameErr= $passErr=$confirmPassErr=$phoneErr="";
-        $counter=0;
+         require_once '../SecurityClasses/inputValidation.php';
         
-        if ((!isset($_POST['name'])) || !isset($_POST['password'])) {
-            
-            if (empty($_SESSION['username'])) {
-                echo 'incorrect username/ password please try again.';
-            }
-            ?>
-            <div class="sidenav">
-                <div class="login-main-text">
-                    <h2>Library<br> Register Page</h2>
-                    <p>Register from here to access.</p>
-                </div>
-            </div>
-            <div class="main">
-                <div class="col-md-9 col-sm-12">
-                    <div class="register-form">
-                        <form method="post" action="Register.php">
-                            <div class="form-group">
-                                <label>UserName*</label>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="User Name">
-                            </div>
-                            <div class="form-group">
-                                <label>Password*</label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Password">
-                            </div>
-                            <div class="form-group">
-                                <label>Confirm Password*</label>
-                                <input type="password" class="form-control" name="password_1" id="password_1" placeholder="Confirm Password">
-                            </div>
-                            <div class="form-group">
-                                <label>Phone Number</label>
-                                <input type="number" class="form-control" name="phone" id="phone" placeholder="601XXXXXXXX">
-                            </div>
-                            <div class="form-group">
-                                <label>Current Address</label>
-                                <input type=text class="form-control" name="address" id="address" >
-                            </div>
-                            <button type="submit" class="btn btn-black">Register</button>
-
-                        </form>
-                        <p><label>Already a Member?</label><a href="login.php"> Login Here</a></p>
-                    </div>
-                </div>
-            </div>
-         </body>
-            <?php
-        } else {
-            
-            $username = trim($_POST['name']);
-            $passwd = shal(trim($_POST['password']));
-            $passwd1= shal(trim($_POST['password1']));
-            $address= $_POST['address'];
-            $phone = $_POST['phone'];
-            $valid = new inputValidation();
-            //validate password
-            if ($valid->stringEquals($passwd, $passwd1)!=true){
-                 //add error message 
-                $confirmPassErr = "<span style=\"color:#ff0033\">Please confirm the passwords are correct</span>";
-                return;
-            }else{
-                
-            }
-            $db = DatabaseConnection::getInstance();    
+        $nameErr = $passErr = $confirmPassErr = $AddressErr = $phoneErr = "";
+        $name = $passwdcon = $passwd = $Address = $phone = "";
+        $counter = 0;
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
            
-            //update database
-            $db->closeConnection();
+            //validate password
+            if (empty($_POST["password"])) {
+                $passErr = "<span style=\"color:#ff0033\">Please enter a password</span>";
+                $counter++;
+            }
+            else{
+                $passwd = inputValidation::test_input(($_POST["password"]));
+            }
+            if ($valid->stringEquals($passwd, $_POST["password_1"]) != true || empty($_POST["password_1"]) ){
+                //add error message 
+                $confirmPassErr .= "<span style=\"color:#ff0033\">Please confirm the passwords are correct</span>";
+                $counter++;
+            }
+            else {
+                $passwdcon= inputValidation::test_input($_POST["password_1"]);
+            }
+            if (empty($_POST['name'])) {
+                $nameErr = "<span style=\"color:#ff0033\">Please enter a Username</span>";
+                $counter++;
+            }
+            elseif(!inputValidation::duplicateUsernameCheck($_POST['name'])){
+               $nameErr .= "<span style=\"color:#ff0033\">Please enter a Different Username</span>";
+                $counter++;
+            }else {
+                $name = inputValidation::test_input($_POST['name']);
+            }
+
+            if (empty($_POST['address'])) {
+                $addressErr = "<span style=\"color:#ff0033\">Please enter an Address</span>";
+                $counter++;
+            }
+            else {
+                $Address= inputValidation::test_input($_POST['address']);
+            }
+                
+            if (empty($_POST['phone'])) {
+                $phoneErr = "<span style=\"color:#ff0033\">Please enter an Phone Number/span>";
+                $counter++;
+            }
+            else{
+                $phone= inputValidation::test_input($_POST['phone']);
+            }
+                
         }
         ?>
-   
+        <div class="sidenav">
+            <div class="login-main-text">
+                <h2>Library<br> Register Page</h2>
+                <p>Register from here to access.</p>
+            </div>
+        </div>
+        <div class="main">
+            <div class="col-md-9 col-sm-12">
+                <div class="register-form">
+                    <form method="post" action="Register.php">
+                        <div class="form-group">
+                            <label>UserName*</label>
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Username" value=<?php echo $name ?>>
+                        </div>
+                        <div class="form-group">
+                            <label>Password*</label>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm Password*</label>
+                            <input type="password" class="form-control" name="password_1" id="password_1" placeholder="Confirm Password">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="number" class="form-control" name="phone" id="phone" placeholder="601XXXXXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label>Current Address</label>
+                            <input type=text class="form-control" name="address" id="address" >
+                        </div>
+                        <button type="submit" class="btn btn-black">Register</button>
+
+                    </form>
+                    <p><label>Already a Member?</label><a href="login.php"> Login Here</a></p>
+                </div>
+            </div>
+        </div>
+    </body>
+    <?php
+    //check for entry length because of limited sql space; todo
+
+
+
+    $db = DatabaseConnection::getInstance();
+
+    //update database
+    $db->closeConnection();
+    ?>
+
 </html>

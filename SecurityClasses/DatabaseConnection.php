@@ -1,16 +1,5 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of DatabaseConnection
- *
- * @author user
- */
+require_once '../class/Users.php';
 class DatabaseConnection {
 
     //put your code here
@@ -57,10 +46,21 @@ class DatabaseConnection {
             return null;
         } else {
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $result["userID"];
+            return new Users($result['userID'],$result['userName'],$result['userAddr'],$result['phoneNumber']);
+        }
+    }
+    public function checkUserName($username){
+         $query = "SELECT * FROM user WHERE userName = ? ";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $username, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
+            return false;
         }
     }
     public function addUser($username, $passwd){
-        
+        //use Sha1 for the password
     }
 }

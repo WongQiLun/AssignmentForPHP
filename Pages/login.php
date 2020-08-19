@@ -9,15 +9,21 @@
 <html>
     <body>
         <?php
+        require_once '../class/Users.php';
+         require_once '../SecurityClasses/DatabaseConnection.php';
+        require_once '../SecurityClasses/InputValidation.php';
         session_start();
         $Error = "";
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ((empty($_POST['name'])) || (empty($_POST['password']))) {
                $Error = "<span style=\"color:#ff0033\">*Invalid Username and/or password</span>";
             }
-
+            if (isset($_SESSION['Error'])){
+                $Error=$_SESSION['Error'];
+                unset($_SESSION['Error']);
+            }
         }
-        require_once '../SecurityClasses/DatabaseConnection.php';
+       
         ?>
         <div class="main">
             <div class="sidenav">
@@ -54,17 +60,22 @@
     <?php
     if ((isset($_POST['name'])) && isset($_POST['password'])) {
         $db = DatabaseConnection::getInstance();
-        $username = trim($_POST['name']);
-        $passwd = trim($_POST['password']);
+    
+        $username = inputValidation::test_input($_POST['name']);
+        $passwd = sha1(inputValidation::test_input($_POST['password']));
         $authuser = $db->retrieveUser($username, $passwd);
 
         if ($authuser == null) {
 
-            $Error = "<span style=\"color:#ff0033\">*Invalid Username and/or password</span>";
+            $_SESSION['Error'] = "<span style=\"color:#ff0033\">*Invalid Username and/or password</span>";
         } else {
-
-            $_SESSION['userID'] = $authuser;
-            $_SESSION['role']= "";//to do function to check oif user is staff
+            //puts the object into session as a serialised object
+            
+            $_SESSION['user'] = serialize($authuser) ;
+            
+            //this is a way to retrieve the user from session data
+            //$obj = unserialize($_SESSION['user']);
+            
             header("Location: index.php");
         }
         $db->closeConnection();

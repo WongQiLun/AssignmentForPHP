@@ -12,19 +12,30 @@
  * @author user
  */
 class inputValidation {
-    function completionValidation($input){
-        if(empty($input)||$input == ""){
-            return false;
-        }
-        return true;
-    }
-    function stringEquals($input1,$input2){
-        if (strcmp($input1 ,$input2)==0){
+
+    function stringEquals($input1, $input2) {
+        if (strcmp($input1, $input2) == 0) {
             return true;
-        }
-        else 
+        } else
             return false;
+    }
+
+    public function duplicateUsernameCheck($username) {
+        //if true duplicates are found
+        //todo write sql
+        
+        return !DatabaseConnection::checkUserName($username);
+    }
+
+    function lengthCheck($input, $desiredLength) {
         
     }
-    
+
+     public function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
 }
