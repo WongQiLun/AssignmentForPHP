@@ -71,3 +71,6 @@ body {
     background-color: #000 !important;
     color: #fff;
 }
+.error {
+    color: #ff0033;
+}

@@ -13,9 +13,18 @@
  */
 class inputValidation {
     function completionValidation($input){
-        if(trim($input)==""){
+        if(empty($input)||$input == ""){
             return false;
         }
         return true;
     }
+    function stringEquals($input1,$input2){
+        if (strcmp($input1 ,$input2)==0){
+            return true;
+        }
+        else 
+            return false;
+        
+    }
+    
 }

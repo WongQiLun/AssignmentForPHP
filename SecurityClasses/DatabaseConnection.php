@@ -28,7 +28,6 @@ class DatabaseConnection {
 
         try {
             $this->db = new PDO($dsn, $dbuser, $dbpassword);
-           
         } catch (PDOException $ex) {
             echo "<p>ERROR: " . $ex->getMessage() . "</p>";
             exit;
@@ -45,8 +44,9 @@ class DatabaseConnection {
     public function closeConnection() {
         $this->db = null;
     }
-   public function retrieveUser($username, $passwd){
-       $query = "SELECT * FROM user WHERE userName = ? AND userPassword = ?";
+
+    public function retrieveUser($username, $passwd) {
+        $query = "SELECT * FROM user WHERE userName = ? AND userPassword = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(1, $username, PDO::PARAM_STR);
         $stmt->bindParam(2, $passwd, PDO::PARAM_STR);
@@ -54,12 +54,13 @@ class DatabaseConnection {
 
         $totalrows = $stmt->rowCount();
         if ($totalrows == 0) {
-            return null; 
-            
+            return null;
         } else {
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $username;
-            }
-   }
-   
+            return $result["userID"];
+        }
+    }
+    public function addUser($username, $passwd){
+        
+    }
 }

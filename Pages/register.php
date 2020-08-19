@@ -10,8 +10,11 @@
     <body>
         <?php
         require_once '../SecurityClasses/DatabaseConnection.php';
+        $nameErr= $passErr=$confirmPassErr=$phoneErr="";
+        $counter=0;
+        
         if ((!isset($_POST['name'])) || !isset($_POST['password'])) {
-            session_start();
+            
             if (empty($_SESSION['username'])) {
                 echo 'incorrect username/ password please try again.';
             }
@@ -56,15 +59,23 @@
          </body>
             <?php
         } else {
-            $db = DatabaseConnection::getInstance();
+            
             $username = trim($_POST['name']);
             $passwd = shal(trim($_POST['password']));
             $passwd1= shal(trim($_POST['password1']));
             $address= $_POST['address'];
             $phone = $_POST['phone'];
-            
+            $valid = new inputValidation();
             //validate password
-            //add error message 
+            if ($valid->stringEquals($passwd, $passwd1)!=true){
+                 //add error message 
+                $confirmPassErr = "<span style=\"color:#ff0033\">Please confirm the passwords are correct</span>";
+                return;
+            }else{
+                
+            }
+            $db = DatabaseConnection::getInstance();    
+           
             //update database
             $db->closeConnection();
         }

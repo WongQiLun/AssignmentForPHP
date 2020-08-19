@@ -13,11 +13,22 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title></title>
     </head>
+
     <body>
         <?php
-        $database = DatabaseConnection::getInstance();
-        $x = new Rental ();
-        $x->rentBook(109, 200);
+        require_once '../SecurityClasses/SessionManagement.php';
+
+
+        if (array_key_exists('logout', $_POST)) {
+            SessionManagement::Logout();
+        }
         ?>
+        <form method="POST">
+            <input type="button" value="Rent"onClick="document.location.href = 'rent.php'" />
+            <input type="button" value="return" onClick="document.location.href = 'return.php'" />
+            <input type="submit" value="logout" name="logout" />
+        </form> 
+
+
     </body>
 </html>
