@@ -17,7 +17,7 @@ class DatabaseConnection {
     private static $instance = null;
     private $db;
 
-    private function __construct() {
+    protected function __construct() {
         $host = 'localhost';
         $dbName = 'assignment_db';
         $dbuser = 'root';
@@ -45,5 +45,20 @@ class DatabaseConnection {
     public function closeConnection() {
         $this->db = null;
     }
+   public function retrieveUser($username, $passwd){
+       $query = "SELECT * FROM user WHERE userName = ? AND userPassword = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $username, PDO::PARAM_STR);
+        $stmt->bindParam(2, $passwd, PDO::PARAM_STR);
+        $stmt->execute();
 
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
+            return null; 
+            
+        } else {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $username;
+            }
+   }
 }
