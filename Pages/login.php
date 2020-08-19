@@ -9,53 +9,72 @@
 <html>
     <body>
         <?php
-        require_once '../SecurityClasses/DatabaseConnection.php';
-        if ((!isset($_POST['name'])) || !isset($_POST['password'])) {
-            session_start();
-            if (empty($_SESSION['username'])) {
-                echo 'incorrect username/ password please try again.';
+        $Error = "";
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if ((empty($_POST['name'])) || (empty($_POST['password']))) {
+                $Error = "Invalid Username and/or password";
+               
             }
-            ?>
-            <div class="sidenav">
-                <div class="login-main-text">
-                    <h2>Application<br> Login Page</h2>
-                    <p>Login or register from here to access.</p>
+            if(empty($_SESSION['username']))
+            {
+                 $Error = "Invalid Username and/or password";
+            }
+        }
+        require_once '../SecurityClasses/DatabaseConnection.php';
+        ?>
+           <div class="main">
+        <div class="sidenav">
+            <div class="login-main-text">
+                <h2>Library<br> Login Page</h2>
+                <p>Login from here to access.</p>
+            </div>
+        </div>
+     
+            <div class="col-md-9 col-sm-12">
+                <div class="login-form">
+                    <span class="error">
+                        <?php echo $Error; ?>
+                    </span>
+                    <form method="post" action="login.php">
+
+                        <div class="form-group">
+                            <label>UserName</label>
+                            <input type="text" class="form-control" name="name" id="name" placeholder="User Name">
+
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-black">Login</button>
+
+                    </form>
+                    <p><label>Not a Member?</label><a href="register.php"> Register Here</a></p>
                 </div>
             </div>
-            <div class="main">
-                <div class="col-md-6 col-sm-12">
-                    <div class="login-form">
-                        <form method="post" action="login.php">
-                            <div class="form-group">
-                                <label>User Name</label>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="User Name">
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Password">
-                            </div>
-                            <button type="submit" class="btn btn-black">Login</button>
-                            <button type="submit" class="btn btn-secondary" >Register</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <?php
+        </div>
+        </body>
+        <?php
+
+        if ((!isset($_POST['name'])) || !isset($_POST['password'])) {
+            $Error = "Invalid Username and/or password";
         } else {
             $db = DatabaseConnection::getInstance();
             $username = trim($_POST['name']);
-            $passwd = shal(trim($_POST['password']));
+            $passwd = sha1(trim($_POST['password']));
             $authuser = $db->retrieveUser($username, $passwd);
 
             if ($authuser == null) {
-                echo "<p>Unauthorized user. </p>";
-                echo "<p><a href='register.php'>Click here to register as a new user</a></p>";
+                
+                    $Error = "Invalid Username and/or password";
+                
             } else {
-                echo "<p><h2>Welcome $username!</h2></p>";
-                echo "<p><a href='search.html'>Search Products</a></p>";
+
+                $_SESSION['username'] = $username;
+                header("Location: index.php");
             }
             $db->closeConnection();
         }
         ?>
-    </body>
+    
 </html>

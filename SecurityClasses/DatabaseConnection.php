@@ -28,7 +28,7 @@ class DatabaseConnection {
 
         try {
             $this->db = new PDO($dsn, $dbuser, $dbpassword);
-            echo "<p>Connection to database successful</p>";
+           
         } catch (PDOException $ex) {
             echo "<p>ERROR: " . $ex->getMessage() . "</p>";
             exit;
@@ -61,4 +61,5 @@ class DatabaseConnection {
             return $username;
             }
    }
+   
 }
