@@ -10,57 +10,63 @@
     <body>
         <?php
         require_once '../SecurityClasses/DatabaseConnection.php';
-         require_once '../SecurityClasses/inputValidation.php';
-        
+        require_once '../SecurityClasses/inputValidation.php';
+
         $nameErr = $passErr = $confirmPassErr = $AddressErr = $phoneErr = "";
         $name = $passwdcon = $passwd = $Address = $phone = "";
         $counter = 0;
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-           
+
             //validate password
             if (empty($_POST["password"])) {
                 $passErr = "<span style=\"color:#ff0033\">Please enter a password</span>";
                 $counter++;
-            }
-            else{
+            } else {
                 $passwd = inputValidation::test_input(($_POST["password"]));
+                $passwdcon = inputValidation::test_input(($_POST["password_1"]));
             }
-            if ($valid->stringEquals($passwd, $_POST["password_1"]) != true || empty($_POST["password_1"]) ){
+            if (strcmp($passwd, $passwdcon) || empty($_POST["password_1"])) {
                 //add error message 
                 $confirmPassErr .= "<span style=\"color:#ff0033\">Please confirm the passwords are correct</span>";
                 $counter++;
-            }
-            else {
-                $passwdcon= inputValidation::test_input($_POST["password_1"]);
+            } else {
+                $passwdcon = inputValidation::test_input($_POST["password_1"]);
             }
             if (empty($_POST['name'])) {
                 $nameErr = "<span style=\"color:#ff0033\">Please enter a Username</span>";
                 $counter++;
-            }
-            elseif(!inputValidation::duplicateUsernameCheck($_POST['name'])){
-               $nameErr .= "<span style=\"color:#ff0033\">Please enter a Different Username</span>";
+            } elseif (!inputValidation::duplicateUsernameCheck($_POST['name'])) {
+                $nameErr .= "<span style=\"color:#ff0033\">Please enter a Different Username</span>";
                 $counter++;
-            }else {
+            } else {
                 $name = inputValidation::test_input($_POST['name']);
             }
 
             if (empty($_POST['address'])) {
                 $addressErr = "<span style=\"color:#ff0033\">Please enter an Address</span>";
                 $counter++;
+            } else {
+                $Address = inputValidation::test_input($_POST['address']);
             }
-            else {
-                $Address= inputValidation::test_input($_POST['address']);
-            }
-                
+
             if (empty($_POST['phone'])) {
                 $phoneErr = "<span style=\"color:#ff0033\">Please enter an Phone Number/span>";
                 $counter++;
+            } else {
+                $phone = inputValidation::test_input($_POST['phone']);
             }
-            else{
-                $phone= inputValidation::test_input($_POST['phone']);
+            if ($counter == 0) {
+                $db2 = DatabaseConnection::getInstance();
+
+                $db2->addUsers($name, sha1($passwd), $phone, $Address);
+
+//update database
+                $db2->closeConnection();
+                header("Location: login.php");
             }
-                
         }
+
+//check for entry length because of limited sql space; todo
         ?>
         <div class="sidenav">
             <div class="login-main-text">
@@ -76,27 +82,27 @@
                             <label>UserName*</label>
                             <input type="text" class="form-control" name="name" id="name" placeholder="Username" value=<?php echo $name ?>>
                         </div>
-                        <?php echo $nameErr?>
+                        <?php echo $nameErr ?>
                         <div class="form-group">
                             <label>Password*</label>
                             <input type="password" class="form-control" name="password" id="password" placeholder="Password" value=<?php echo $passwd ?>>
                         </div>
-                        <?php echo $passErr?>
+                        <?php echo $passErr ?>
                         <div class="form-group">
                             <label>Confirm Password*</label>
                             <input type="password" class="form-control" name="password_1" id="password_1" placeholder="Confirm Password">
                         </div>
-                         <?php echo $confirmPassErr?>
+                        <?php echo $confirmPassErr ?>
                         <div class="form-group">
                             <label>Phone Number</label>
                             <input type="number" class="form-control" name="phone" id="phone" placeholder="601XXXXXXXX"value=<?php echo $phone ?>>
                         </div>
-                         <?php echo $phoneErr?>
+                        <?php echo $phoneErr ?>
                         <div class="form-group">
                             <label>Current Address</label>
                             <input type=text class="form-control" name="address" id="address"  value=<?php echo $Address ?>>
                         </div>
-                        <?php echo $AddressErr?>
+                        <?php echo $AddressErr ?>
                         <button type="submit" class="btn btn-black">Register</button>
 
                     </form>
@@ -105,15 +111,6 @@
             </div>
         </div>
     </body>
-    <?php
-    //check for entry length because of limited sql space; todo
 
-
-
-    $db = DatabaseConnection::getInstance();
-
-    //update database
-    $db->closeConnection();
-    ?>
 
 </html>

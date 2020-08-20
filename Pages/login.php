@@ -10,20 +10,17 @@
     <body>
         <?php
         require_once '../class/Users.php';
-         require_once '../SecurityClasses/DatabaseConnection.php';
+        require_once '../SecurityClasses/DatabaseConnection.php';
         require_once '../SecurityClasses/InputValidation.php';
         session_start();
         $Error = "";
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ((empty($_POST['name'])) || (empty($_POST['password']))) {
-               $Error = "<span style=\"color:#ff0033\">*Invalid Username and/or password</span>";
-            }
-            if (isset($_SESSION['Error'])){
-                $Error=$_SESSION['Error'];
-                unset($_SESSION['Error']);
+                $Error = "<span style=\"color:#ff0033\">*Enter a Username and/or password</span>";
+            } else {
+                $Error = $_SESSION['Error'];
             }
         }
-       
         ?>
         <div class="main">
             <div class="sidenav">
@@ -48,9 +45,9 @@
                             <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                         </div>
                         <button type="submit" class="btn btn-black">Login</button>
-                        
-                                <?php echo $Error; ?>
-                            
+
+                        <?php echo $Error; ?>
+
                     </form>
                     <p><label>Not a Member?</label><a href="register.php"> Register Here</a></p>
                 </div>
@@ -60,7 +57,7 @@
     <?php
     if ((isset($_POST['name'])) && isset($_POST['password'])) {
         $db = DatabaseConnection::getInstance();
-    
+
         $username = inputValidation::test_input($_POST['name']);
         $passwd = sha1(inputValidation::test_input($_POST['password']));
         $authuser = $db->retrieveUser($username, $passwd);
@@ -70,12 +67,12 @@
             $_SESSION['Error'] = "<span style=\"color:#ff0033\">*Invalid Username and/or password</span>";
         } else {
             //puts the object into session as a serialised object
-            
-            $_SESSION['user'] = serialize($authuser) ;
-            
+
+            $_SESSION['user'] = serialize($authuser);
+
             //this is a way to retrieve the user from session data
             //$obj = unserialize($_SESSION['user']);
-            
+
             header("Location: index.php");
         }
         $db->closeConnection();

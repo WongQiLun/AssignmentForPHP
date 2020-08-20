@@ -68,14 +68,29 @@ class DatabaseConnection {
         }
     }
 
-    public function addUser($username, $passwd, $phone, $address) {
-        $query = "INSERT INTO user ( `userName`, `userAddr`, `phoneNumber`, `userPassword`)VALUES (?,?,?,?) ";
+    public function addUsers($username, $passwd, $phone, $address) {
+        $query =" INSERT INTO `user`(`userName`, `userAddr`, `phoneNumber`, `userPassword`)"
+                . " VALUES (?,?,?,?)";
+        //i have no idea why this is but if you remove this the pdo is null despite you already establishing it elsewhere :)
+        $host = 'localhost';
+        $dbName = 'assignment_db';
+        $dbuser = 'root';
+        $dbpassword = '';
+
+        // set up DSN
+        $dsn = "mysql:host=$host;dbname=$dbName";
+
+        
+        $this->db = new PDO($dsn, $dbuser, $dbpassword);
         $stmt = $this->db->prepare($query);
+         
         $stmt->bindParam(1, $username, PDO::PARAM_STR);
-        $stmt->bindParam(2, $phone, PDO::PARAM_STR);
-        $stmt->bindParam(3, $address, PDO::PARAM_STR);
-        $stmt->bindParam(4, $password, PDO::PARAM_STR);
+        $stmt->bindParam(2, $address, PDO::PARAM_STR);
+        $stmt->bindParam(3, $phone, PDO::PARAM_STR);
+        $stmt->bindParam(4, $passwd, PDO::PARAM_STR);
         $stmt->execute();
+        
+        $this->closeConnection();
         //use Sha1 for the password
     }
 
@@ -107,8 +122,16 @@ class DatabaseConnection {
         $last_id = $this->db->lastInsertId();
         
         $rental->setRentalID($last_id);
-        
+         $this->rentBook($bookID);
         return $rental;
+    }
+    function rentBook($bookID){
+         $query = "Update `book` SET `status`=\"Rented\" WHERE bookID = ?"; 
+         $stmt = $this->db->prepare($query);
+         $stmt->bindParam(1, $bookID, PDO::PARAM_STR);
+         
+          $stmt->execute();
+         
     }
 
     public function retrieveStaff($userID) {
