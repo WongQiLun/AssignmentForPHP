@@ -1,11 +1,12 @@
 <?php
 
 class SessionManagement {
-  
-    public  function  Logout(){       
+
+    static public function Logout() {
         session_start();
-session_destroy();
-header('Location: login.php');
-exit;
+        session_destroy();
+        header('Location: login.php');
+        exit;
     }
+
 }

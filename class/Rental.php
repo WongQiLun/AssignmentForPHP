@@ -6,11 +6,19 @@ class Rental {
     private $duedate;
     private $staffID;
     private $bookID;
+    private $userID;
     function getBookID() {
         return $this->bookID;
     }
+    function getUserID() {
+        return $this->userID;
+    }
 
-    function setBookID($bookID): void {
+    function setUserID($userID): void {
+        $this->userID = $userID;
+    }
+
+        function setBookID($bookID): void {
         $this->bookID = $bookID;
     }
 
@@ -46,16 +54,18 @@ class Rental {
         $this->staffID = $staffID;
     }
 
-    function __construct($staffID,$bookID){
+    function __construct($userID,$staffID,$bookID){
         $this->setStaffID($staffID) ;
         $this->setbookID($bookID);
+        $this->setUserID($userID);
         $this->setDateOfRental(date("Y-m-d"));
         $this->setDuedate($this->calculateDuedate());
         //rental ID is incremented
-        //todo : addinto  database
+        
+     
         //todo : make xml into printable ticket
     }
-    
+
    function calculateDuedate(){
        $date=   new DateTime(   $this->getDateOfRental());
        $date->add(new DateInterval('P14D'));

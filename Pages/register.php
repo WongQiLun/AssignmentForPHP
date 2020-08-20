@@ -76,22 +76,27 @@
                             <label>UserName*</label>
                             <input type="text" class="form-control" name="name" id="name" placeholder="Username" value=<?php echo $name ?>>
                         </div>
+                        <?php echo $nameErr?>
                         <div class="form-group">
                             <label>Password*</label>
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Password" value=<?php echo $passwd ?>>
                         </div>
+                        <?php echo $passErr?>
                         <div class="form-group">
                             <label>Confirm Password*</label>
                             <input type="password" class="form-control" name="password_1" id="password_1" placeholder="Confirm Password">
                         </div>
+                         <?php echo $confirmPassErr?>
                         <div class="form-group">
                             <label>Phone Number</label>
-                            <input type="number" class="form-control" name="phone" id="phone" placeholder="601XXXXXXXX">
+                            <input type="number" class="form-control" name="phone" id="phone" placeholder="601XXXXXXXX"value=<?php echo $phone ?>>
                         </div>
+                         <?php echo $phoneErr?>
                         <div class="form-group">
                             <label>Current Address</label>
-                            <input type=text class="form-control" name="address" id="address" >
+                            <input type=text class="form-control" name="address" id="address"  value=<?php echo $Address ?>>
                         </div>
+                        <?php echo $AddressErr?>
                         <button type="submit" class="btn btn-black">Register</button>
 
                     </form>

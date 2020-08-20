@@ -13,11 +13,11 @@
  */
 class Users {
 
-    private $userID;
-    private $userName;
-    private $userAddr;
-    private $phoneNumber;
-    private $password;
+    protected $userID;
+    protected $userName;
+    protected $userAddr;
+    protected$phoneNumber;
+    protected$password;
     public function getUserID() {
         return $this->userID;
     }
