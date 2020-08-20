@@ -35,7 +35,7 @@
             if (empty($_POST['name'])) {
                 $nameErr = "<span style=\"color:#ff0033\">Please enter a Username</span>";
                 $counter++;
-            } elseif (!inputValidation::duplicateUsernameCheck($_POST['name'])) {
+            } elseif (inputValidation::duplicateUsernameCheck($_POST['name'])) {
                 $nameErr .= "<span style=\"color:#ff0033\">Please enter a Different Username</span>";
                 $counter++;
             } else {
@@ -80,7 +80,7 @@
                     <form method="post" action="Register.php">
                         <div class="form-group">
                             <label>UserName*</label>
-                            <input type="text" class="form-control" name="name" id="name" placeholder="Username" value=<?php echo $name ?>>
+                            <input type="text" class="form-control" size="30" name="name" id="name" placeholder="Username" value=<?php echo $name ?>>
                         </div>
                         <?php echo $nameErr ?>
                         <div class="form-group">
@@ -100,10 +100,10 @@
                         <?php echo $phoneErr ?>
                         <div class="form-group">
                             <label>Current Address</label>
-                            <input type=text class="form-control" name="address" id="address"  value=<?php echo $Address ?>>
+                            <input type=text size="50"class="form-control" name="address" id="address"  value=<?php echo $Address ?>>
                         </div>
                         <?php echo $AddressErr ?>
-                        <button type="submit" class="btn btn-black">Register</button>
+                        <button type="submit"  class="btn btn-black">Register</button>
 
                     </form>
                     <p><label>Already a Member?</label><a href="login.php"> Login Here</a></p>
