@@ -35,7 +35,7 @@
             if (empty($_POST['name'])) {
                 $nameErr = "<span style=\"color:#ff0033\">Please enter a Username</span>";
                 $counter++;
-            } elseif (inputValidation::duplicateUsernameCheck($_POST['name'])) {
+            } elseif (!inputValidation::duplicateUsernameCheck($_POST['name'])) {
                 $nameErr .= "<span style=\"color:#ff0033\">Please enter a Different Username</span>";
                 $counter++;
             } else {
