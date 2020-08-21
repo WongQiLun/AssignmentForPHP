@@ -26,9 +26,10 @@ and open the template in the editor.
         }
       if (array_key_exists('Rent', $_POST)) {
           $db= DatabaseConnection::getInstance();
-          $db->addRental(1,1,2);
+          $db->createBookXMLFile();
           $db->closeConnection();
-           // header("Location: rent.php");
+          
+            header("Location: rent.php");
         }
         ?>
         <form method="POST" action="index.php">

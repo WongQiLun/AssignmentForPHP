@@ -9,6 +9,9 @@ require_once '../class/Rental.php';
         Staff ID:<input type="number" name = "staffID" value="" /><br/>
     </p>
     <input type="submit" value="Remt" name="submit"/>
+    <a href="../xmlFiles/books.xml" target="_blank">
+        click me to see the catalog
+    </a>
 </form>
 
 <?php

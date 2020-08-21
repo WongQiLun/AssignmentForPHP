@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="books.xsl"?>
+<books><book bookID="1"><title>big black cookies</title><author>piper perrri</author><price>1992</price><status>Rented</status><description>It's a book about cookies</description><location>here</location></book><book bookID="2"><title>Peaner pan</title><author>Captain Hooker</author><price>1998</price><status>Rented</status><description>It's about NeberLand</description><location>Neverland</location></book></books>
