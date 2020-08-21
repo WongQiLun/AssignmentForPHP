@@ -1,3 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="books.xsl"?>
-<books><book bookID="1"><title>big black cookies</title><author>piper perrri</author><price>1992</price><status>Rented</status><description>It's a book about cookies</description><location>here</location></book><book bookID="2"><title>Peaner pan</title><author>Captain Hooker</author><price>1998</price><status>Rented</status><description>It's about NeberLand</description><location>Neverland</location></book></books>
+<books>
+    <book bookID="1">
+        <title>big black cookies</title>
+        <author>piper perrri</author>
+        <yearOfPub>1992</yearOfPub>
+        <status>Rented</status>
+        <description>It's a book about cookies</description>
+        <location>here</location>
+    </book>
+    <book bookID="2">
+        <title>Peaner pan</title>
+        <author>Captain Hooker</author>
+        <yearOfPub>1998</yearOfPub>
+        <status>Rented</status>
+        <description>It's about NeberLand</description>
+        <location>Neverland</location>
+    </book>
+    <book bookID="3">
+        <title>big black cooties</title>
+        <author>a</author>
+        <yearOfPub>1992</yearOfPub>
+        <status>232</status>
+        <description>23</description>
+        <location>2322</location>
+    </book>
+    <book bookID="4">
+        <title>232</title>
+        <author>2323</author>
+        <yearOfPub>232</yearOfPub>
+        <status>232</status>
+        <description>232</description>
+        <location>232</location>
+    </book>
+    <book bookID="5">
+        <title>big black cooties</title>
+        <author>a</author>
+        <yearOfPub>1992</yearOfPub>
+        <status>232</status>
+        <description>23</description>
+        <location>2322</location>
+    </book>
+    <book bookID="6">
+        <title>232</title>
+        <author>2323</author>
+        <yearOfPub>232</yearOfPub>
+        <status>232</status>
+        <description>232</description>
+        <location>232</location>
+    </book>
+</books>

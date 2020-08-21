@@ -17,8 +17,6 @@
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ((empty($_POST['name'])) || (empty($_POST['password']))) {
                 $Error = "<span style=\"color:#ff0033\">*Enter a Username and/or password</span>";
-            } else {
-                $Error = $_SESSION['Error'];
             }
         }
         ?>

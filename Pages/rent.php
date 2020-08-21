@@ -21,6 +21,7 @@ if (isset($_POST['submit'])) {
     //$user=  unserialize($_SESSION['user']);
     //$userID = $user->getUserID();
     $userID = 1;
+        
     $url = "http://localhost/AssignmentforPHP/PHPServices/RentalRESTService.php?bookID=" . $bookID .
             "&staffID=" . $staffID . "&userID=" . $userID;
     $client = curl_init($url);

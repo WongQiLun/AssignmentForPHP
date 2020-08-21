@@ -25,7 +25,7 @@ and open the template in the editor.
             SessionManagement::Logout();
         }
       if (array_key_exists('Rent', $_POST)) {
-          $db= DatabaseConnection::getInstance();
+      $db= DatabaseConnection::getInstance();
           $db->createBookXMLFile();
           $db->closeConnection();
           

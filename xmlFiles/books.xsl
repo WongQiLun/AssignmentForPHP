@@ -12,59 +12,59 @@
 <xsl:template match="/">
         <html>
             <head>
-                <title>Food</title>
+                <title>Book Catalog</title>
             </head>
             <body>
-                <h1>Food</h1>
+                <h1>Book Catalog </h1>
                 <hr />
                 <xsl:apply-templates/>
             </body>
         </html>
     </xsl:template>
-    <xsl:template match="foodList">
+    <xsl:template match="books">
         <table border="1">
             <TR>
                 <th>
-                    no
+                    Book ID
                 </th>
                 <th>
-                    name
+                    Author
                 </th>
                 <th>
-                    carb
+                    Year
                 </th>
                 <th>
-                    fiber
+                    Status
                 </th>
                 <th>
-                    fat
+                    Description
                 </th>
                 <th>
-                    kj
+                    Location
                 </th>
             </TR>
-            <xsl:for-each select="foodItem">
+            <xsl:for-each select="book">
                <xsl:sort select="name" order="ascending"/>
             <tr>
                 <td>
-                    <xsl:value-of select="position()" />
+                    <xsl:value-of select="@bookID" />
                 </td>
                 <td>
-                    <xsl:value-of select="name"/>
+                    <xsl:value-of select="title"/>
                 </td>
                 
                 <td>
-                    <xsl:value-of select="carbsPerServing"/>
+                    <xsl:value-of select="author"/>
                 </td>
                 
                  <td>
-                    <xsl:value-of select="fiberPerServing"/>
+                    <xsl:value-of select="yearOfPub"/>
                 </td>
                  <td>
-                    <xsl:value-of select="fatPerServing"/>
+                    <xsl:value-of select="description"/>
                 </td>
                  <td>
-                    <xsl:value-of select="kjPerServing"/>
+                    <xsl:value-of select="location"/>
                 </td>
             </tr>
             </xsl:for-each>

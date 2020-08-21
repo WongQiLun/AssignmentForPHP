@@ -193,7 +193,7 @@ class DatabaseConnection {
             $book->appendChild($name);
             $author = $dom->createElement('author', $bookAuthor);
             $book->appendChild($author);
-            $yearOfPub = $dom->createElement('price', $bookYearOfPub);
+            $yearOfPub = $dom->createElement('yearOfPub', $bookYearOfPub);
             $book->appendChild($yearOfPub);
             $status = $dom->createElement('status', $bookStatus);
             $book->appendChild($status);
