@@ -1,7 +1,7 @@
 <?php
 require_once '../class/Rental.php';
 require_once '../class/Users.php';
- 
+session_start();
 ?>
 
 <head>
@@ -85,6 +85,7 @@ require_once '../class/Users.php';
                 <input type="number" name = "bookID" value="" /><br/>
             </div>
         </div>
+        <?php if(empty($_SESSION['staffID'])){ ?>
         <div class="row">
             <div class="col-25">
                 Staff ID:
@@ -93,7 +94,7 @@ require_once '../class/Users.php';
                 <input type="number" name = "staffID" value="" /><br/>
             </div>
         </div>
-
+        <?php } ?>
 
         </p>
         <input type="submit" value="Rent" name="submit"/>
@@ -104,22 +105,27 @@ require_once '../class/Users.php';
 </div>
 <?php
 if (isset($_POST['submit'])) {
-   session_start();
-    $bookID = $_POST['bookID'];
-    $staffID = $_POST['staffID'];
-    $user = unserialize($_SESSION['user']);
-    $userID = $user->getUserID();
-    // $userID = 1;
 
-    $url = "http://localhost/AssignmentforPHP/PHPServices/RentalRESTService.php?bookID=" . $bookID .
-            "&staffID=" . $staffID . "&userID=" . $userID;
-    $client = curl_init($url);
-    curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+$bookID = $_POST['bookID'];
 
-    $response = curl_exec($client);
-    $result = json_decode($response);
+$staffID = $_POST['staffID'];
+if(!empty($_SESSION['staffID'])){
+$staffID = $_SESSION['staffID'];
+}
 
-    echo "<p><h3>Date Rented :" . $result->dateRented . "</h3></p>";
-    echo "<p><h3>Date to return :" . $result->dueDate . "</h3></p>";
+$user = unserialize($_SESSION['user']);
+$userID = $user->getUserID();
+// $userID = 1;
+
+$url = "http://localhost/AssignmentforPHP/PHPServices/RentalRESTService.php?bookID=" . $bookID .
+"&staffID=" . $staffID . "&userID=" . $userID;
+$client = curl_init($url);
+curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($client);
+$result = json_decode($response);
+
+echo "<p><h3>Date Rented :" . $result->dateRented . "</h3></p>";
+echo "<p><h3>Date to return :" . $result->dueDate . "</h3></p>";
 }
 // DOM PARSER HERE

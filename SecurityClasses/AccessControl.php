@@ -17,8 +17,8 @@ class AccessControl {
         session_start();
 
         if (!empty($_SESSION['staffID'])) {
-            echo " <input type=`button` value=`addNewBook` "
-            . "onClick=`document.location.href = 'return.php'` />"
+            echo " <input type='button' value='addNewBook' "
+            . "onClick=\"document.location.href = 'AddNewBook.php'\" />"
             ;
         }
     }

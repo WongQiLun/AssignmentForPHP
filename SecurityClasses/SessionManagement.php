@@ -16,7 +16,6 @@ class SessionManagement {
 
        $staff =$db->retrieveStaff($user->getUserID());
        if (!empty($staff) ){
-           echo $staff['staffID'];
            $_SESSION['staffID'] = $staff['staffID'];
        }
        $db->closeConnection();
