@@ -107,8 +107,9 @@ session_start();
 if (isset($_POST['submit'])) {
 
 $bookID = $_POST['bookID'];
-
+if(isset( $_POST['staffID'])){
 $staffID = $_POST['staffID'];
+}
 if(!empty($_SESSION['staffID'])){
 $staffID = $_SESSION['staffID'];
 }
@@ -125,6 +126,10 @@ curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
 $response = curl_exec($client);
 $result = json_decode($response);
 
+echo "<p><h3>Book Rented : " . $bookID. ".".$result->bookName. "</h3></p>";
+echo "<p><h3>Staff in charge : " . $staffID . ".".$result->staffName."</h3></p>";
+
+echo "<p><h3>Renting User:" . $userID . "</h3></p>";
 echo "<p><h3>Date Rented :" . $result->dateRented . "</h3></p>";
 echo "<p><h3>Date to return :" . $result->dueDate . "</h3></p>";
 }

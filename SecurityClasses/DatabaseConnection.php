@@ -208,6 +208,39 @@ class DatabaseConnection {
 //returns array only for now
         }
     }
+    public function retrieveBook($bookID){
+               $query = "SELECT * FROM book WHERE bookID = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $bookID, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
+            return null;
+        } else {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result;
+//returns array only for now
+        }
+    }
+    
+        public function retrieveStaffWithStaffID($staffID) {
+        $query = "SELECT * FROM staff WHERE staffID = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $staffID, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
+            return null;
+        } else {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result;
+//returns array only for now
+        }
+    }
 
     public function createBookXMLFile() {
         $query = "SELECT * FROM `book` WHERE 1";
@@ -267,5 +300,5 @@ class DatabaseConnection {
         $dom->appendChild($root);
         $dom->save($filePath);
     }
-
+    
 }
