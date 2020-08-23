@@ -7,9 +7,7 @@ if (!empty($_GET['bookID']) && !empty($_GET['staffID']) && !empty($_GET['userID'
     //$bookID = $_GET['bookID'];
    // $staffID = $_GET['rate'];
    // $userID = $_GET['userID'];
-    $bookID= 1;
-    $staffID=1;
-    $userID=1;
+
     $db = DatabaseConnection::getInstance();
     $rental= $db->AddRental($userID, $staffID, $bookID) ;
     if (empty($rental)) {
