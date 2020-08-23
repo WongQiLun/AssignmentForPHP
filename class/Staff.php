@@ -1,5 +1,7 @@
 <?php
+
 require_once 'Users.php';
+require_once 'userDecorator.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,25 +13,28 @@ require_once 'Users.php';
  *
  * @author user
  */
-class Staff extends Users {
+class Staff extends userDecorator {
+
     private $staffID;
     private $staffName;
-    
+
     function __construct($staffID, $staffName, $userID, $userName, $userAddr, $phoneNumber) {
         $this->staffID = $staffID;
         $this->staffName = $staffName;
-        
-        parent::__construct($userID, $userName, $userAddr, $phoneNumber);
+
+        parent::__construct(new Users($userID, $userName, $userAddr, $phoneNumber));
     }
-    function castParent($staffID, $staffName,$parentclass){
-        $this->userID = $parentclass->userID;
-        $this->userAddr = $parentclass->userAddr;
-        $this->phoneNumber = $parentclass->phoneNumber;
-        $this->userName= $parentclass->userName;
-        $this->password = $parentclass->password ;
-                $this->staffID = $staffID;
-        $this->staffName = $staffName;
-        
+
+    function castParent($staffID, $staffName, $parentclass) {
+        try {
+            parent::__construct($parentclass);
+
+            $this->staffID = $staffID;
+            $this->staffName = $staffName;
+            return true;
+        } catch (Exception $ex) {
+            return false;
+        }
     }
 
     function getStaffID() {
@@ -47,6 +52,5 @@ class Staff extends Users {
     function setStaffName($staffName): void {
         $this->staffName = $staffName;
     }
-
 
 }
