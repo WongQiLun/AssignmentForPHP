@@ -34,7 +34,7 @@ class Returns {
 
     function getDateOfReturn() {
         if ($this->dateOfRental == null){
-            $this->dateOfRental = new(date("Y-m-d"));
+            $this->dateOfRental = new date("Y-m-d");
         }
         return $this->dateOfReturn;
     }

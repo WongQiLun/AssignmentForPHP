@@ -12,5 +12,15 @@
  * @author user
  */
 class AccessControl {
-    //put your code here
+
+    static public function LoadStaffControl() {
+        session_start();
+
+        if (!empty($_SESSION['staffID'])) {
+            echo " <input type=`button` value=`addNewBook` "
+            . "onClick=`document.location.href = 'return.php'` />"
+            ;
+        }
+    }
+
 }

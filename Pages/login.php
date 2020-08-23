@@ -12,12 +12,14 @@
         require_once '../class/Users.php';
         require_once '../SecurityClasses/DatabaseConnection.php';
         require_once '../SecurityClasses/InputValidation.php';
+        require_once '../SecurityClasses/SessionManagement.php';
         session_start();
         $Error = "";
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ((empty($_POST['name'])) || (empty($_POST['password']))) {
                 $Error = "<span style=\"color:#ff0033\">*Enter a Username and/or password</span>";
             }
+            $Error =  $_SESSION['Error'];
         }
         ?>
         <div class="main">
@@ -66,8 +68,8 @@
         } else {
             //puts the object into session as a serialised object
 
-            $_SESSION['user'] = serialize($authuser);
-
+            SessionManagement::login($authuser);
+            
             //this is a way to retrieve the user from session data
             //$obj = unserialize($_SESSION['user']);
 

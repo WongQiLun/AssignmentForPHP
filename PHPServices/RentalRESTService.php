@@ -5,7 +5,7 @@ require_once '../class/Rental.php';
 require_once '../SecurityClasses/DatabaseConnection.php';
 if (!empty($_GET['bookID']) && !empty($_GET['staffID']) && !empty($_GET['userID'])) {
     $bookID = $_GET['bookID'];
-    $staffID = $_GET['rate'];
+    $staffID = $_GET['staffID'];
    $userID = $_GET['userID'];
 
     $db = DatabaseConnection::getInstance();

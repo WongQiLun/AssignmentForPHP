@@ -1,5 +1,7 @@
 <?php
 require_once '../class/Rental.php';
+require_once '../class/Users.php';
+ 
 ?>
 
 <head>
@@ -102,6 +104,7 @@ require_once '../class/Rental.php';
 </div>
 <?php
 if (isset($_POST['submit'])) {
+   session_start();
     $bookID = $_POST['bookID'];
     $staffID = $_POST['staffID'];
     $user = unserialize($_SESSION['user']);

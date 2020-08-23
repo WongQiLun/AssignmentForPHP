@@ -18,6 +18,7 @@ and open the template in the editor.
         <?php
         require_once '../SecurityClasses/SessionManagement.php';
          require_once '../SecurityClasses/DatabaseConnection.php';
+         require_once '../SecurityClasses/AccessControl.php';
          require_once '../class/Rental.php';
 
      
@@ -36,6 +37,7 @@ and open the template in the editor.
             <input type="submit" value="Rent"name="Rent" onClick="document.location.href = 'rent.php'" />
             <input type="button" value="return" onClick="document.location.href = 'return.php'" />
             <input type="submit" value="logout" name="logout" />
+            <?php AccessControl::LoadStaffControl();?>
         </form> 
 
 
