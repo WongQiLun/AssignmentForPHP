@@ -185,7 +185,7 @@ class DatabaseConnection {
 
 
     function returnBook($bookID){
-        $query = "Update `book` SET `status`=\"Returned\" WHERE bookID = ?";
+        $query = "Update `book` SET `status`=\"Available\" WHERE bookID = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(1, $bookID, PDO::PARAM_STR);
 
