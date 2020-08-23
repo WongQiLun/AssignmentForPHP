@@ -5,8 +5,6 @@ class inputValidation {
 
 
     static public function duplicateUsernameCheck($username) {
-        //if true duplicates are found
-        //todo write sql
         $db = DatabaseConnection::getInstance();
         $bool = !($db->checkUserName($username));
         $db->closeConnection();
@@ -23,7 +21,7 @@ class inputValidation {
         return true;
     }
 
-    static public function test_input($data) {
+    static public function test_input($data) {  
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);

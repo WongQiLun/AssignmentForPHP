@@ -21,6 +21,7 @@ and open the template in the editor.
          require_once '../SecurityClasses/AccessControl.php';
          require_once '../class/Rental.php';
        
+         AccessControl::checkUser();
      
         if (array_key_exists('logout', $_POST)) {
             SessionManagement::Logout();
