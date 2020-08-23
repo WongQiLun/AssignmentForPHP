@@ -15,7 +15,8 @@ require_once '../class/Return.php';
 if (isset($_POST['submit'])){
     $rentalID = $_POST['rentalID'];
     $staffID = $_POST['staffID'];
-    $userID = 1; //placeholder, session management is not working
+    $user=  unserialize($_SESSION['user']);
+    $userID = $user->getUserID();
     
     $url= "http://localhost/AssignmentforPHP/PHPServices/ReturnRESTService.php?rentalID=" . $rentalID .
             "&staffID=" . $staffID . "&userID=" . $userID;

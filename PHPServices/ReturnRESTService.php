@@ -5,12 +5,12 @@ require_once '../class/Return.php';
 require_once '../SecurityClasses/DatabaseConnection.php';
 
 if (!empty($_GET['rentalID']) && !empty($_GET['staffID']) && !empty($_GET['userID'])) {
-    //$bookID = $_GET['bookID'];
-   // $staffID = $_GET['rate'];
-   // $userID = $_GET['userID'];
-    $rentalID= 1;
-    $staffID=1;
-    $userID=1;
+    $bookID = $_GET['rentalID'];
+    $staffID = $_GET['staffID'];
+    $userID = $_GET['userID'];
+//    $rentalID= 1;
+//    $staffID=1;
+//    $userID=1;
     $db = DatabaseConnection::getInstance();    
     //fetch info about rental and create return
     $rental = $db->retrieveRental($rentalID);
