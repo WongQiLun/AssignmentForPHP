@@ -1,5 +1,7 @@
 <?php
 require_once '../class/Return.php';
+require_once '../class/Users.php';
+session_start();
 ?>
 <h2>Book Return Web Service Client</h2>
 <form method="post">
