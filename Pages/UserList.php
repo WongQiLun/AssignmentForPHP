@@ -10,8 +10,6 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <?php
-        // put your code here
-        ?>
+        <H1> NOT YET IMPLEMENTED </h1>
     </body>
 </html>

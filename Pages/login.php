@@ -13,7 +13,7 @@
         require_once '../SecurityClasses/DatabaseConnection.php';
         require_once '../SecurityClasses/InputValidation.php';
         require_once '../SecurityClasses/SessionManagement.php';
-        session_start();
+        session_start();        
         $Error = "";
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ((empty($_POST['name'])) || (empty($_POST['password']))) {

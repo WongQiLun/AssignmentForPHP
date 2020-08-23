@@ -12,6 +12,7 @@ if (!empty($_GET['bookID']) && !empty($_GET['staffID']) && !empty($_GET['userID'
     $rental= $db->AddRental($userID, $staffID, $bookID) ;
     $staff=$db->retrieveStaffWithStaffID($staffID);
     $book=$db->retrieveBook($bookID);
+    $db->closeConnection();
     $staffName="";
     $bookName="";
     
