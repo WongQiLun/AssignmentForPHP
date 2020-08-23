@@ -133,6 +133,64 @@ class DatabaseConnection {
 
         $stmt->execute();
     }
+    
+    function retrieveRental($rentalID){
+        $query = "SELECT * FROM user WHERE rentalID = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $rentalID, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
+            return null;
+        } else {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return new Rental($result['dateOfRental'], $result['dueDate'], $result['userID'], $result['staffID'], $result['bookID']);
+        }
+    }
+    
+    function addReturn($staffID, $rentalID){
+        
+        $return = new Returns($staffID,$rentalID);
+        $query = "INSERT INTO `rental`( `dateOfReturn`, `daysOverdue`, `overdueFee`, `returnID`, `rentalID`, `staffID`)"
+                . " VALUES (?,?,?,?,?)";
+        
+        $rental = $db->retrieveRental($rentalID);
+        $return->returnBook($rental);
+
+        $stmt = $this->db->prepare($query);
+        $date = $return->getDateOfReturn();
+        $date2 = $return->getDaysOverdue();
+        $overdue = $return->getOverdueFee();
+        
+        $last_id = $this->db->lastInsertId();
+        $return->setReturnID($last_id);
+        
+
+        $stmt->bindParam(1, $date, PDO::PARAM_STR);
+        $stmt->bindParam(2, $date2, PDO::PARAM_STR);
+        $stmt->bindParam(3, $overdue, PDO::PARAM_STR);
+        $stmt->bindParam(4, $return->getReturnID(), PDO::PARAM_STR);
+        $stmt->bindParam(5, $rentalID, PDO::PARAM_STR);
+        $stmt->bindParam(6, $staffID, PDO::PARAM_STR);
+
+
+        $stmt->execute();
+        
+        $bookID = $rental->getbookID();
+        $this->returnBook(bookID);
+        return $return;
+        
+    }
+
+
+    function returnBook($bookID){
+        $query = "Update `book` SET `status`=\"Returned\" WHERE bookID = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(1, $bookID, PDO::PARAM_STR);
+
+        $stmt->execute();
+    }
 
     public function retrieveStaff($userID) {
         $query = "SELECT * FROM staff WHERE userID = ?";

@@ -27,6 +27,9 @@ class Rental {
     }
 
     function getDateOfRental() {
+        if ($this->dateOfRental == null){ //just realised this is declared on constructor
+            $this->dateOfRental = new date("Y-m-d");
+        }
         return $this->dateOfRental;
     }
 

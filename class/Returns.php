@@ -33,10 +33,16 @@ class Returns {
     }
 
     function getDateOfReturn() {
+        if ($this->dateOfRental == null){
+            $this->dateOfRental = new(date("Y-m-d"));
+        }
         return $this->dateOfReturn;
     }
 
     function getOverdueFee() {
+        if (overdueFee == null){
+            $this->overdueFee = 0;
+        }
         return $this->overdueFee;
     }
 
@@ -55,22 +61,27 @@ class Returns {
     function setReturnID($returnID): void {
         $this->returnID = $returnID;
     }
-    function retrieveRental(){
-        
+    function retrieveRental(){  //declared on DatabaseConnection.php              
     }
-    function retrieveDueDate() {//toDO
+    
+    function retrieveDueDate($rental) {//retrieve dueDate based on the rental that is putted into the parameter
+        $rental = new Rental();
+        $this->$rental = $rental;
+        return $this->$rental->getDuedate();
     }
 
-    function calculateOverdueFees() {//toDo
+    function calculateOverdueFees($daysOverdue) {//toDo
+        $rate = 2;
+        $this->overdueFee = $rate * $this->daysOverdue;
     }
 
-    function returnBook() {
+    function returnBook($rental) {
         $this->setDateOfReturn(date("Y-m-d"));
         $dayOfReturn = strtotime($this->$dateOfReturn);
-        $duedate = strtotime($this->retrieveDueDate());
+        $duedate = strtotime($this->retrieveDueDate($rental));
         $this->daysOverdue = $dayOfReturn - $duedate;
         if ($this->daysOverdue >= 1) {
-            $this->calculateOverdueFees();
+            $this->calculateOverdueFees($this->daysOverdue);
         }
         // insert into database
     }
