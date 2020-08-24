@@ -1,6 +1,7 @@
 <?php
 require_once '../class/Rental.php';
 require_once '../class/Users.php';
+require_once '../SecurityClasses/AccessControl.php';
 session_start();
 AccessControl::checkUser();
 ?>

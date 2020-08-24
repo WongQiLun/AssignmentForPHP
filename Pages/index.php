@@ -3,7 +3,6 @@
 require_once '../SecurityClasses/DatabaseConnection.php';
 require_once '../class/Returns.php';
 require_once '../SecurityClasses/SessionManagement.php';
-
 require_once '../SecurityClasses/AccessControl.php';
 require_once '../class/Rental.php';
 ?>
