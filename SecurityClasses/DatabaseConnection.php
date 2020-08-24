@@ -135,7 +135,7 @@ class DatabaseConnection {
     }
     
     function retrieveRental($rentalID){
-        $query = "SELECT * FROM user WHERE rentalID = ?";
+        $query = "SELECT * FROM `rental` WHERE rentalID = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(1, $rentalID, PDO::PARAM_STR);
         $stmt->execute();
