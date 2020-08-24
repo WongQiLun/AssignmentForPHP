@@ -152,7 +152,7 @@ class DatabaseConnection {
     function addReturn($staffID, $rentalID){
         
         $return = new Returns($staffID,$rentalID);
-        $query = "INSERT INTO `rental`( `dateOfReturn`, `daysOverdue`, `overdueFee`, `returnID`, `rentalID`, `staffID`)"
+        $query = "INSERT INTO `bookReturn`( `dateOfReturn`, `daysOverdue`, `overdueFee`, `returnID`, `rentalID`, `staffID`)"
                 . " VALUES (?,?,?,?,?)";
         
         $rental = $db->retrieveRental($rentalID);
