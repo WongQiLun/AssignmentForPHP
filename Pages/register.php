@@ -5,7 +5,9 @@
     <link href="login.css" rel="stylesheet">
     <title>Login page</title>
 </head>
-<!------ Include the above in your HEAD tag ---------->
+<!--
+Author : Wong Qi Lun
+-->
 <html>
     <body>
         <?php

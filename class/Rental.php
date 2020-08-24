@@ -1,5 +1,5 @@
 <?php
-
+//author :Wong Qi Lun
 class Rental {
     private $rentalID;
     private $dateOfRental;

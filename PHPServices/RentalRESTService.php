@@ -1,4 +1,5 @@
 <?php
+//Author : Wong Qi Lun
 
 header("Content-Type:application/json");
 require_once '../class/Rental.php';

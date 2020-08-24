@@ -1,7 +1,7 @@
 <?php
 require_once 'DatabaseConnection.php';
 class SessionManagement {
-
+//author :Wong Qi Lun
     static public function Logout() {
         session_start();
         session_destroy();

@@ -2,17 +2,7 @@
 
 require_once 'Users.php';
 require_once 'userDecorator.php';
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Staff
- *
- * @author user
- */
+//author :Wong Qi Lun
 class Staff extends userDecorator {
 
     private $staffID;

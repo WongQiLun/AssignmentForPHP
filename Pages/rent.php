@@ -3,7 +3,9 @@ require_once '../class/Rental.php';
 require_once '../class/Users.php';
 session_start();
 ?>
-
+<!--
+Author : Wong Qi Lun
+-->
 <head>
     <style>
         * {

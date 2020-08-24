@@ -4,10 +4,10 @@ require_once '../class/Users.php';
 require_once '../class/Staff.php';
 require_once '../class/Rental.php';
 require_once '../class/Book.php';
-
+//author :Wong Qi Lun, See E Jet
 class DatabaseConnection {
 
-//put your code here
+
     private static $instance = null;
     private $db;
 

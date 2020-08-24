@@ -1,5 +1,5 @@
 <?php
-
+//author :Wong Qi Lun
 class AccessControl {
 
     static public function checkUser() {
