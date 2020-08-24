@@ -2,6 +2,7 @@
 require_once '../class/Rental.php';
 require_once '../class/Users.php';
 session_start();
+AccessControl::checkUser();
 ?>
 <!--
 Author : Wong Qi Lun

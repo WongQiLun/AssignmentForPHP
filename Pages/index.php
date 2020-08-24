@@ -16,9 +16,7 @@ require_once '../class/Rental.php';
     </head>
     <style>
         .btn-group input {
-
             border: 1px solid ; /* Green border */
-
             padding: 10px 24px; /* Some padding */
             margin:10px auto; 
             height: 100px;
@@ -38,11 +36,8 @@ require_once '../class/Rental.php';
         }
     </style>
     <body>
-        <?php
-        
+        <?php        
         AccessControl::checkUser();
-         
-
         if (array_key_exists('logout', $_POST)) {
             SessionManagement::Logout();
         }
