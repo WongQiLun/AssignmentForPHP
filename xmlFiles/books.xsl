@@ -1,13 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!--
-    Document   : food.xsl
-    Created on : 4 August 2020, 2:17 pm
-    Author     : user
-    Description:
-        Purpose of transformation follows.
--->
-
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 <xsl:template match="/">
         <html>
