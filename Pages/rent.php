@@ -131,7 +131,7 @@ $response = curl_exec($client);
 $result = json_decode($response);
 
 echo "<p><h3>Book Rented : " . $bookID. ".".$result->bookName. "</h3></p>";
-echo "<p><h3>Staff in charge : " . $staffID . ".".$result->staffName."</h3></p>";
+echo "<p><h3>Staff in charge : " . $result->staffName."</h3></p>";
 
 echo "<p><h3>Renting User:" . $userID . "</h3></p>";
 echo "<p><h3>Date Rented :" . $result->dateRented . "</h3></p>";
