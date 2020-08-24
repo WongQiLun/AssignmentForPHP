@@ -15,6 +15,8 @@ if (!empty($_GET['rentalID']) && !empty($_GET['staffID']) && !empty($_GET['userI
     //fetch info about rental and create return
     $rental = $db->retrieveRental($rentalID);
     $return = $db->AddReturn($staffID, $rentalID);
+    $db->createRentXMLFile();
+    $db->closeConnection();
     if (empty($return)) {
         response(200,"ERROR",null);
     } else {

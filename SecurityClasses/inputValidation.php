@@ -27,5 +27,5 @@ class inputValidation {
         $data = htmlspecialchars($data);
         return $data;
     }
-
+    
 }

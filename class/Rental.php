@@ -56,6 +56,15 @@ class Rental {
     function setStaffID($staffID): void {
         $this->staffID = $staffID;
     }
+    
+    public function __toString() {
+    return "Rental ID: " . $this->rentalID . " <br />" . 
+            "Book ID: " . $this->bookID . " <br />".
+            "User ID: " . $this->userID . " <br />" .
+            "Staff ID: " . $this->staffID . " <br />" .
+            "Date of Rental: " . $this->dateOfRental . " <br />" .
+            "Due Date: " . $this->duedate . " <br />" ;
+  }
 
     function __construct($userID,$staffID,$bookID){
         $this->setStaffID($staffID) ;

@@ -4,9 +4,9 @@ require_once '../class/Users.php';
 require_once '../class/Staff.php';
 require_once '../class/Rental.php';
 require_once '../class/Book.php';
+
 //author :Wong Qi Lun, See E Jet
 class DatabaseConnection {
-
 
     private static $instance = null;
     private $db;
@@ -133,8 +133,8 @@ class DatabaseConnection {
 
         $stmt->execute();
     }
-    
-    function retrieveRental($rentalID){
+
+    function retrieveRental($rentalID) {
         $query = "SELECT * FROM `rental` WHERE rentalID = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(1, $rentalID, PDO::PARAM_STR);
@@ -148,13 +148,13 @@ class DatabaseConnection {
             return new Rental($result['dateOfRental'], $result['dueDate'], $result['userID'], $result['staffID'], $result['bookID']);
         }
     }
-    
-    function addReturn($staffID, $rentalID){
-        
-        $return = new Returns($staffID,$rentalID);
+
+    function addReturn($staffID, $rentalID) {
+
+        $return = new Returns($staffID, $rentalID);
         $query = "INSERT INTO `bookReturn`( `dateOfReturn`, `daysOverdue`, `overdueFee`, `returnID`, `rentalID`, `staffID`)"
                 . " VALUES (?,?,?,?,?)";
-        
+
         $rental = $db->retrieveRental($rentalID);
         $return->returnBook($rental);
 
@@ -162,10 +162,10 @@ class DatabaseConnection {
         $date = $return->getDateOfReturn();
         $date2 = $return->getDaysOverdue();
         $overdue = $return->getOverdueFee();
-        
+
         $last_id = $this->db->lastInsertId();
         $return->setReturnID($last_id);
-        
+
 
         $stmt->bindParam(1, $date, PDO::PARAM_STR);
         $stmt->bindParam(2, $date2, PDO::PARAM_STR);
@@ -176,15 +176,13 @@ class DatabaseConnection {
 
 
         $stmt->execute();
-        
+
         $bookID = $rental->getbookID();
         $this->returnBook(bookID);
         return $return;
-        
     }
 
-
-    function returnBook($bookID){
+    function returnBook($bookID) {
         $query = "Update `book` SET `status`=\"Available\" WHERE bookID = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(1, $bookID, PDO::PARAM_STR);
@@ -208,8 +206,9 @@ class DatabaseConnection {
 //returns array only for now
         }
     }
-    public function retrieveBook($bookID){
-               $query = "SELECT * FROM book WHERE bookID = ?";
+
+    public function retrieveBook($bookID) {
+        $query = "SELECT * FROM book WHERE bookID = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(1, $bookID, PDO::PARAM_STR);
 
@@ -224,8 +223,8 @@ class DatabaseConnection {
 //returns array only for now
         }
     }
-    
-        public function retrieveStaffWithStaffID($staffID) {
+
+    public function retrieveStaffWithStaffID($staffID) {
         $query = "SELECT * FROM staff WHERE staffID = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(1, $staffID, PDO::PARAM_STR);
@@ -300,17 +299,22 @@ class DatabaseConnection {
         $dom->appendChild($root);
         $dom->save($filePath);
     }
-    
-    function  createRentXMLFile(){ //fetch all rental from database
+
+    function createRentXMLFile() { //fetch all rental from database
         $query = "SELECT * FROM `rental` WHERE 1";
 
         $stmt = $this->db->prepare($query);
         $stmt->execute();
-        $booksArray = $stmt->fetchAll();
+        $rentalArray = $stmt->fetchAll();
 
-        if (count($booksArray) > 0) {
-            $this->createXMLfile($booksArray);
+        if (count($rentalArray) > 0) {
+            $this->createSAXXMLfile($rentalArray);
         }
     }
-    
+
+    function createSAXXMLfile() {
+        $filename = '../xmlFiles/rental.xml';
+        $rentalXML = new SAXParser($filename);
+    }
+
 }
