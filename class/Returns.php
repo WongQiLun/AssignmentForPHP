@@ -61,7 +61,7 @@ class Returns {
     function setReturnID($returnID): void {
         $this->returnID = $returnID;
     }
-    function retrieveRental(){  //declared on DatabaseConnection.php              
+    function retrieveRental(){  //declared on DatabaseConnection.php        
     }
     
     function retrieveDueDate($rental) {//retrieve dueDate based on the rental that is putted into the parameter

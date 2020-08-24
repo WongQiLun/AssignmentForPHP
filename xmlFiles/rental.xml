@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rentals>
+  
+  <rental rentalID="10301">
+    <dateOfRental>2020-08-24</dateOfRental>
+    <duedate>2020-09-07</duedate>
+    <userID>5001</userID>
+    <staffID>6001</staffID>
+    <bookID>7001</bookID>
+  </rental>
+  <rental rentalID="10302">
+    <dateOfRental>2020-08-23</dateOfRental>
+    <duedate>2020-09-06</duedate>
+    <userID>5001</userID>
+    <staffID>6001</staffID>
+    <bookID>7001</bookID>
+  </rental>
+  <rental rentalID="10303">
+    <dateOfRental>2020-08-22</dateOfRental>
+    <duedate>2020-09-05</duedate>
+    <userID>5001</userID>
+    <staffID>6002</staffID>
+    <bookID>7001</bookID>
+  </rental>
+  <rental rentalID="10304">
+    <dateOfRental>2020-08-23</dateOfRental>
+    <duedate>2020-09-06</duedate>
+    <userID>5001</userID>
+    <staffID>6002</staffID>
+    <bookID>7001</bookID>
+  </rental>
+  <rental rentalID="10305">
+    <dateOfRental>2020-08-24</dateOfRental>
+    <duedate>2020-09-07</duedate>
+    <userID>5001</userID>
+    <staffID>6001</staffID>
+    <bookID>7001</bookID>
+  </rental>
+  <rental rentalID="10306">
+    <dateOfRental>2020-08-03</dateOfRental>
+    <duedate>2020-08-17</duedate>
+    <userID>5002</userID>
+    <staffID>6002</staffID>
+    <bookID>7001</bookID>
+  </rental>
+
+</rentals>

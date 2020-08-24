@@ -47,6 +47,11 @@ require_once '../class/Rental.php';
 
             header("Location: rent.php");
         }
+        if(array_key_exists('return', $POST)){
+            $db = DatabaseConnection::getInstance();
+            $db->createRentXMLFile();
+            $db->closeConnection();
+        }
         ?>
         <form method="POST" action="index.php" >
             <div class="btn-group">

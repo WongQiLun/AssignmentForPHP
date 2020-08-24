@@ -36,7 +36,6 @@ if (!empty($_GET['rentalID']) && !empty($_GET['staffID']) && !empty($_GET['userI
 function response( $status,$DateOfReturn,$overdueFee, $daysOverdue){
     header("HTTP/1.1".$status);
     $response['status']=$status;
-    //what to show on
     $response['dateReturned']=$DateOfReturn;
     $response['overdueFee']=$overdueFee;
     $response['daysOverdue']=$daysOverdue;

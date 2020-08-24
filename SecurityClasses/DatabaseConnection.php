@@ -301,4 +301,16 @@ class DatabaseConnection {
         $dom->save($filePath);
     }
     
+    function  createRentXMLFile(){ //fetch all rental from database
+        $query = "SELECT * FROM `rental` WHERE 1";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $booksArray = $stmt->fetchAll();
+
+        if (count($booksArray) > 0) {
+            $this->createXMLfile($booksArray);
+        }
+    }
+    
 }
