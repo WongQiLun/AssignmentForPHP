@@ -6,7 +6,7 @@ class inputValidation {
 
     static public function duplicateUsernameCheck($username) {
         $db = DatabaseConnection::getInstance();
-        $bool = !($db->checkUserName($username));
+        $bool = ($db->checkUserName($username));
         $db->closeConnection();
         return $bool ;
     }

@@ -65,7 +65,10 @@ class DatabaseConnection {
         if ($totalrows == 0) {
             return false;
 //false meaning it doesnt exist
+        } else {
+            return true;
         }
+    
     }
 
     public function addUsers($username, $passwd, $phone, $address) {
