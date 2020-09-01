@@ -51,6 +51,9 @@
                  <td>
                     <xsl:value-of select="yearOfPub"/>
                 </td>
+                                 <td>
+                    <xsl:value-of select="status"/>
+                </td>
                  <td>
                     <xsl:value-of select="description"/>
                 </td>
