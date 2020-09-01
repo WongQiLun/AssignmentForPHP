@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
-<xsl:template match="/">
+    <xsl:template match="/">
         <html>
             <head>
                 <title>Book Catalog</title>
@@ -19,6 +19,9 @@
                     Book ID
                 </th>
                 <th>
+                    Title
+                </th>
+                <th>
                     Author
                 </th>
                 <th>
@@ -35,32 +38,32 @@
                 </th>
             </TR>
             <xsl:for-each select="book">
-               <xsl:sort select="name" order="ascending"/>
-            <tr>
-                <td>
-                    <xsl:value-of select="@bookID" />
-                </td>
-                <td>
-                    <xsl:value-of select="title"/>
-                </td>
+                <xsl:sort select="name" order="ascending"/>
+                <tr>
+                    <td>
+                        <xsl:value-of select="@bookID" />
+                    </td>
+                    <td>
+                        <xsl:value-of select="title"/>
+                    </td>
                 
-                <td>
-                    <xsl:value-of select="author"/>
-                </td>
+                    <td>
+                        <xsl:value-of select="author"/>
+                    </td>
                 
-                 <td>
-                    <xsl:value-of select="yearOfPub"/>
-                </td>
-                                 <td>
-                    <xsl:value-of select="status"/>
-                </td>
-                 <td>
-                    <xsl:value-of select="description"/>
-                </td>
-                 <td>
-                    <xsl:value-of select="location"/>
-                </td>
-            </tr>
+                    <td>
+                        <xsl:value-of select="yearOfPub"/>
+                    </td>
+                    <td>
+                        <xsl:value-of select="status"/>
+                    </td>
+                    <td>
+                        <xsl:value-of select="description"/>
+                    </td>
+                    <td>
+                        <xsl:value-of select="location"/>
+                    </td>
+                </tr>
             </xsl:for-each>
         </table>
     </xsl:template>
